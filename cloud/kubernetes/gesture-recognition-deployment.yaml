@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hand-gesture-recognition
+  labels:
+    app: hand-gesture-recognition
+spec:
+  replicas: 3 # Number of pod replicas you want to run
+  selector:
+    matchLabels:
+      app: hand-gesture-recognition
+  template:
+    metadata:
+      labels:
+        app: hand-gesture-recognition
+    spec:
+      containers:
+        - name: hand-gesture-recognition
+          image: <your_ecr_or_dockerhub_image>:latest # Replace with your image URL
+          ports:
+            - containerPort: 5000 # Change if your app runs on a different port
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "0.5"
+            limits:
+              memory: "1024Mi"
+              cpu: "1"
